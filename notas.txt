@@ -1,0 +1,87 @@
+Entidades:
+
+    Paciente: Representa a una persona que solicita turnos en la clínica.
+    Medico: Representa a un médico que atiende los turnos de los pacientes.
+    Especialidad: Describe la especialidad médica de un médico.
+    Turno: Representa la cita programada entre un paciente y un médico en una fecha y hora específicas.
+    Receta: Documento emitido por el médico durante la consulta que contiene los medicamentos recetados al paciente.
+    Medicamento: Representa un medicamento disponible en la farmacia.
+    Obra Social: Proporciona cobertura médica a los pacientes.
+    Farmacia: Establecimiento donde se venden medicamentos.
+    Droguería: Proveedor de medicamentos para la farmacia.
+
+Relaciones entre Entidades:
+
+    Paciente - Turno - Medico: Relación de solicitud y atención de turno.
+    Medico - Especialidad: Cada médico tiene una especialidad.
+    Medico - Receta - Medicamento: Si el médico emite una receta, contiene uno o más medicamentos.
+    Paciente - Obra Social: Relación entre el paciente y su obra social.
+    Farmacia - Medicamento: La farmacia tiene un stock de medicamentos.
+    Farmacia - Pedido - Droguería: Si no hay suficiente stock, se realiza un pedido a la droguería.
+
+Funcionalidades:
+
+    Gestión de Turnos: Los pacientes pueden solicitar turnos con médicos de diferentes especialidades.
+    Atención Médica: Los médicos atienden los turnos, emiten recetas si es necesario.
+    Gestión de Farmacia: Venta de medicamentos, posiblemente solicitando medicamentos a la droguería si no hay suficiente stock.
+    Gestión de Pedido a Droguería: Si no hay suficiente stock en la farmacia, se debe solicitar a la droguería.
+    Listar Médicos por Especialidad y Obra Social: Para que los pacientes puedan elegir a qué médico ir.
+    Listar Médicos para Turno Particular: Los pacientes que desean un turno particular deben poder ver qué médicos están disponibles.
+
+Patrones de Diseño:
+
+    Singleton: Para las clases de servicio como GestionTurnoService, AtencionMedicoService y GestionFarmaciaService para asegurar una única instancia.
+    DAO (Data Access Object): Para gestionar las operaciones de acceso a datos a través de interfaces como MedicoDAO, PacienteDAO, etc.
+    Factory Method: Para la creación de objetos como Medicamento, Receta, etc.
+
+clinica/
+│
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       ├── models/
+│   │       │   ├── Paciente.java
+│   │       │   ├── Medico.java
+│   │       │   ├── Especialidad.java
+│   │       │   ├── Turno.java
+│   │       │   ├── Receta.java
+│   │       │   ├── Medicamento.java
+│   │       │   ├── ObraSocial.java
+│   │       │   ├── Farmacia.java
+│   │       │   └── Drogueria.java
+│   │       │
+│   │       ├── dao/
+│   │       │   ├── interfaces/
+│   │       │   │   ├── PacienteDAO.java
+│   │       │   │   ├── MedicoDAO.java
+│   │       │   │   ├── EspecialidadDAO.java
+│   │       │   │   ├── TurnoDAO.java
+│   │       │   │   ├── RecetaDAO.java
+│   │       │   │   ├── MedicamentoDAO.java
+│   │       │   │   ├── ObraSocialDAO.java
+│   │       │   │   ├── FarmaciaDAO.java
+│   │       │   │   └── DrogueriaDAO.java
+│   │       │   │
+│   │       │   └── implementations/
+│   │       │       ├── PacienteDAOImpl.java
+│   │       │       ├── MedicoDAOImpl.java
+│   │       │       ├── EspecialidadDAOImpl.java
+│   │       │       ├── TurnoDAOImpl.java
+│   │       │       ├── RecetaDAOImpl.java
+│   │       │       ├── MedicamentoDAOImpl.java
+│   │       │       ├── ObraSocialDAOImpl.java
+│   │       │       ├── FarmaciaDAOImpl.java
+│   │       │       └── DrogueriaDAOImpl.java
+│   │       │
+│   │       ├── services/
+│   │       │   ├── GestionTurnoService.java
+│   │       │   ├── AtencionMedicoService.java
+│   │       │   └── GestionFarmaciaService.java
+│   │       │
+│   │       └── Main.java
+│   │
+│   └── test/
+│       └── java/
+│           └── (pruebas unitarias)
+│
+└── notas.txt
