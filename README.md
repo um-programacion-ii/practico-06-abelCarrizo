@@ -1,4 +1,4 @@
-# prog2.2024.practico06
+# Practico 06
 
 Escenario
 
