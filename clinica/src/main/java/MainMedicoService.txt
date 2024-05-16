@@ -1,0 +1,47 @@
+import dao.implementations.RecetaDAOImpl;
+import dao.implementations.TurnoDAOImpl;
+import dao.interfaces.RecetaDAO;
+import dao.interfaces.TurnoDAO;
+import java.util.ArrayList;
+import java.util.List;
+import models.Medicamento;
+import models.Medico;
+import models.Paciente;
+import models.Receta;
+import models.Turno;
+import services.AtencionMedicoService;
+
+public class Main {
+    public static void main(String[] args) {
+        // Crear instancias de DAOs simulados
+        TurnoDAO turnoDAO = new TurnoDAOImpl();
+        RecetaDAO recetaDAO = new RecetaDAOImpl();
+
+        // Crear instancias de entidades simuladas
+        Paciente paciente = new Paciente("Juan", "Pérez", null); // Reemplaza null con una instancia de ObraSocial si es necesario
+        Medico medico = new Medico("Dr. Carlos", "González", null, null); // Reemplaza null con una lista de ObraSocial y una instancia de Especialidad si es necesario
+        Turno turno = new Turno(paciente, medico, false); // Reemplaza false con true si es un turno particular
+
+        // Crear instancias de medicamentos
+        Medicamento medicamento1 = new Medicamento("Paracetamol", 10);
+        Medicamento medicamento2 = new Medicamento("Ibuprofeno", 20);
+
+        // Crear lista de medicamentos para la receta
+        List<Medicamento> medicamentos = new ArrayList<>();
+        medicamentos.add(medicamento1);
+        medicamentos.add(medicamento2);
+
+        // Crear instancia de AtencionMedicoService
+        AtencionMedicoService atencionMedicoService = AtencionMedicoService.getInstancia(turnoDAO, recetaDAO);
+
+        // Probar el servicio de gestión de turno
+        System.out.println("Gestión de turno:");
+        Turno turnoGestionado = atencionMedicoService.gestionTurnoInit(turno);
+        System.out.println("Turno gestionado: " + turnoGestionado);
+
+        // Probar el servicio de gestión de receta
+        System.out.println("\nGestión de receta:");
+        Receta recetaGestionada = atencionMedicoService.gestionRecetaInit(medicamentos, turnoGestionado);
+        System.out.println("Receta gestionada: " + recetaGestionada);
+    }
+}
