@@ -1,0 +1,47 @@
+import models.Especialidad;
+import models.Medico;
+import models.ObraSocial;
+import models.Paciente;
+import services.GestionTurnoService;
+import dao.implementations.MedicoDAOImpl;
+import dao.implementations.TurnoDAOImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    public static void main(String[] args) {
+        // Creamos algunas instancias de especialidades
+        Especialidad cardiologia = new Especialidad("Cardiología");
+        Especialidad dermatologia = new Especialidad("Dermatología");
+
+        // Creamos algunas instancias de obras sociales
+        ObraSocial obraSocial1 = new ObraSocial("ObraSocial1");
+        ObraSocial obraSocial2 = new ObraSocial("ObraSocial2");
+
+        // Creamos algunas instancias de médicos y asociamos las especialidades y obras sociales
+        List<ObraSocial> obraSocialMedico1 = new ArrayList<>();
+        obraSocialMedico1.add(obraSocial1);
+        Medico medico1 = new Medico("Juan", "Perez", obraSocialMedico1, cardiologia);
+
+        List<ObraSocial> obraSocialMedico2 = new ArrayList<>();
+        obraSocialMedico2.add(obraSocial2);
+        Medico medico2 = new Medico("Maria", "Gomez", obraSocialMedico2, dermatologia);
+
+        // Creamos una instancia de paciente
+        Paciente paciente = new Paciente("Pedro", "Martinez", obraSocial1);
+
+        // Creamos una instancia del servicio GestionTurnoService
+        GestionTurnoService gestionTurnoService = GestionTurnoService.getInstancia(new TurnoDAOImpl(), new MedicoDAOImpl());
+
+        // Probamos el método solicitarMedicoEspecialidad
+        List<Medico> medicosDisponibles = gestionTurnoService.solicitarMedicoEspecialidad(cardiologia, paciente);
+        System.out.println("Médicos disponibles para especialidad Cardiología y obra social ObraSocial1:");
+        for (Medico medico : medicosDisponibles) {
+            System.out.println(medico.getNombre() + " " + medico.getApellido());
+        }
+
+        // Probamos el método solicitarTurno
+        gestionTurnoService.solicitarTurno(paciente, medico1, true);
+    }
+}
