@@ -14,7 +14,7 @@ import models.Especialidad;
 import models.Medico;
 import models.ObraSocial;
 
-public class MedicoDAOImplTest {
+public class MedicoDAOTest {
     private MedicoDAO medicoDAO;
 
     @BeforeEach

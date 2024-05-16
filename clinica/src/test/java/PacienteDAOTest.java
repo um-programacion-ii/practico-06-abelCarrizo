@@ -11,7 +11,7 @@ import dao.interfaces.PacienteDAO;
 import models.ObraSocial;
 import models.Paciente;
 
-public class PacienteDAOImplTest {
+public class PacienteDAOTest {
     private PacienteDAO pacienteDAO;
 
     @BeforeEach

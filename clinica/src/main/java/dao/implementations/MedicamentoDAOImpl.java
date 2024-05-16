@@ -1,11 +1,12 @@
 package dao.implementations;
 
-import dao.interfaces.MedicamentoDAO;
-import models.Medicamento;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import dao.interfaces.MedicamentoDAO;
+import models.Medicamento;
 
 public class MedicamentoDAOImpl implements MedicamentoDAO {
     private final Map<Integer, Medicamento> medicamentos = new HashMap<>();
@@ -25,7 +26,7 @@ public class MedicamentoDAOImpl implements MedicamentoDAO {
     public List<Medicamento> findByCantidad(int cantidad) {
         List<Medicamento> medicamentosConCantidad = new ArrayList<>();
         for (Medicamento medicamento : medicamentos.values()) {
-            if (medicamento.getCantidad() >= cantidad) {
+            if (medicamento.getCantidad() == cantidad) { 
                 medicamentosConCantidad.add(medicamento);
             }
         }
