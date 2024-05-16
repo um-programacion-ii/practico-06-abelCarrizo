@@ -32,7 +32,6 @@ Patrones de Diseño:
 
     Singleton: Para las clases de servicio como GestionTurnoService, AtencionMedicoService y GestionFarmaciaService para asegurar una única instancia.
     DAO (Data Access Object): Para gestionar las operaciones de acceso a datos a través de interfaces como MedicoDAO, PacienteDAO, etc.
-    Factory Method: Para la creación de objetos como Medicamento, Receta, etc.
 
 clinica/
 │
